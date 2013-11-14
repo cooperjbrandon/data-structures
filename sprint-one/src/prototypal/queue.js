@@ -5,7 +5,7 @@ var makeQueue = function(){
  instance.storage = {};
   instance.length = 0;
   instance.lastRemoved = -1;
-  instance.orderInLine = 0;
+  instance.orderAdded = 0;
 
 
   return instance;
@@ -15,8 +15,8 @@ var makeQueue = function(){
 var queueMethods = {
 
   enqueue: function(value){
-    this.storage[this.orderInLine] = value;
-    this.orderInLine++;
+    this.storage[this.orderAdded] = value;
+    this.orderAdded++;
     this.length++;
   },
 

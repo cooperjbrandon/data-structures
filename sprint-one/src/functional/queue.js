@@ -5,13 +5,13 @@ var makeQueue = function(){
   var storage = {};
   var size = 0;
   var lastRemoved = -1;
-  var orderInLine = 0;
+  var orderAdded = 0;
 
   // Implement the methods below
 
   instance.enqueue = function(value){
-    storage[orderInLine] = value;
-    orderInLine++;
+    storage[orderAdded] = value;
+    orderAdded++;
     size++;
   };
 
