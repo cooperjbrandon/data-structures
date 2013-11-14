@@ -22,16 +22,16 @@ var queueMethods = {
   enqueue: function(value){
     this.storage[this.orderInLine] = value;
     this.orderInLine++;
-    length++;
+    this.length++;
   },
 
   dequeue: function(){
-    length && length--;
-    lastRemoved++;
-    return storage[lastRemoved];
+    this.length && this.length--;
+    this.lastRemoved++;
+    return this.storage[this.lastRemoved];
   },
 
   size: function(){
-    return length;
+    return this.length;
   }
 };
