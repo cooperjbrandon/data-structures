@@ -28,10 +28,17 @@ var makeLinkedList = function(){
     if(size) {
       size--;
       lastRemoved++;
-      list.head = storage[lastRemoved+1].value;
+      if(size === 0) {
+        list.head = null;
+        list.tail = null;
+      } else {
+        list.head = storage[lastRemoved+1].value;
+      }
       delete containsObject.lastRemoved;
+      // debugger;
       return storage[lastRemoved].value;
-    }};
+    }
+  };
 
   list.contains = function(num){
     return _.contains(Object.keys(containsObject), num);
