@@ -26,40 +26,52 @@ describe("linkedList", function() {
 
   it('allows sequentially adding and removing items', function() {
     linkedList.addToTail('a');
-    expect(linkedList.removeHead()).toEqual('a'); //runs
     linkedList.addToTail('b');
-    expect(linkedList.removeHead()).toEqual('b');
+    expect(linkedList.removeHead()).toEqual('a');
     linkedList.addToTail('c');
     linkedList.addToTail('d');
-    expect(linkedList.removeHead()).toEqual('c');
+    expect(linkedList.removeHead()).toEqual('b');
   });
 
   it('points to correct head when sequentially adding and removing items', function() {
     linkedList.addToTail('a');
-    expect(linkedList.head).toEqual('a');
+    expect(linkedList.head.value).toEqual('a');
     linkedList.addToTail('b');
     linkedList.addToTail('c');
     linkedList.removeHead();
-    expect(linkedList.head).toEqual('b');
+    expect(linkedList.head.value).toEqual('b');
   });
 
   it('points to correct tail when sequentially adding and removing items', function() {
     linkedList.addToTail('a');
-    expect(linkedList.tail).toEqual('a');
+    expect(linkedList.tail.value).toEqual('a');
     linkedList.addToTail('b');
     linkedList.addToTail('c');
     linkedList.removeHead();
-    expect(linkedList.tail).toEqual('c');
+    expect(linkedList.tail.value).toEqual('c');
   });
 
-    it('returns null for heads and tails if there are no heads or tails', function() {
+  it('returns null for heads and tails if there are no heads or tails', function() {
     expect(linkedList.head).toEqual(null);
     linkedList.addToTail('a');
     linkedList.addToTail('b');
     linkedList.removeHead();
+    linkedList.addToTail('c');
+    expect(linkedList.head.value).toEqual('b');
+    expect(linkedList.tail.value).toEqual('c');
+    // expect(linkedList.head.value).toEqual('b');    
+    // linkedList.removeHead();
+    // expect(linkedList.head).toEqual(null);
+    // expect(linkedList.tail).toEqual(null);
+  });
+
+  it('returns true if the passed in value is in the linked list', function() {
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    linkedList.addToTail('c');
+    expect(linkedList.contains('b')).toEqual(true);
     linkedList.removeHead();
-    expect(linkedList.head).toEqual(null);
-    expect(linkedList.tail).toEqual(null);
+    expect(linkedList.contains('a')).toEqual(false);
   });
 
   // add more tests here to test the functionality of linkedList
