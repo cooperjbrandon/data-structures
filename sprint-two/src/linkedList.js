@@ -1,22 +1,11 @@
 // Note: don't use an array to do this.
 
-var makeLinkedList = function(){
-  var list = {};
-  list.head = null;
-  list.tail = null;
-
-  list.addToTail = listMethods.addToTail;
-
-  list.removeHead = listMethods.removeHead;
-
-  list.contains = listMethods.contains;
-
-  return list;
+var LinkedList = function(){
+  this.head = null;
+  this.tail = null;
 };
 
-var listMethods = {
-
-addToTail: function(val){
+LinkedList.prototype.addToTail = function(val){
     if (this.head === null){
       this.tail = makeNode(val);
       this.head = this.tail;
@@ -24,21 +13,20 @@ addToTail: function(val){
       this.tail.next = makeNode(val);
       this.tail = this.tail.next;
     }
-  },
+  };
 
-  removeHead: function(){
+LinkedList.prototype.removeHead = function(){
     var removed = this.head.value;
     this.head = this.head.next;
     if(this.head === null) {
       this.tail = null;
     }
     return removed;
-  },
+  };
 
-  contains: function(val){
+LinkedList.prototype.contains = function(val){
     return checkVal(this.head, val);
-  }
-};
+  };
 
 var makeNode = function(val){
   var node = {};
