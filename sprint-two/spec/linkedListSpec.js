@@ -56,13 +56,13 @@ describe("linkedList", function() {
     linkedList.addToTail('a');
     linkedList.addToTail('b');
     linkedList.removeHead();
-    linkedList.addToTail('c');
+    // linkedList.addToTail('c');
+    // expect(linkedList.head.value).toEqual('b');
+    // expect(linkedList.tail.value).toEqual('c');
     expect(linkedList.head.value).toEqual('b');
-    expect(linkedList.tail.value).toEqual('c');
-    // expect(linkedList.head.value).toEqual('b');    
-    // linkedList.removeHead();
-    // expect(linkedList.head).toEqual(null);
-    // expect(linkedList.tail).toEqual(null);
+    linkedList.removeHead();
+    expect(linkedList.head).toEqual(null);
+    expect(linkedList.tail).toEqual(null);
   });
 
   it('returns true if the passed in value is in the linked list', function() {

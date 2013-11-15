@@ -18,6 +18,9 @@ var makeLinkedList = function(){
   list.removeHead = function(){
     var removed = list.head.value;
     list.head = list.head.next;
+    if(list.head === null) {
+      list.tail = null;
+    }
     return removed;
   };
 
