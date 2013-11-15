@@ -25,6 +25,7 @@ describe("linkedList", function() {
   // });
 
   it('allows sequentially adding and removing items', function() {
+    expect(linkedList.removeHead()).toEqual(null);
     linkedList.addToTail('a');
     linkedList.addToTail('b');
     expect(linkedList.removeHead()).toEqual('a');

@@ -16,6 +16,9 @@ LinkedList.prototype.addToTail = function(val){
   };
 
 LinkedList.prototype.removeHead = function(){
+    if (this.head === null) {
+      return null;
+    }
     var removed = this.head.value;
     this.head = this.head.next;
     if(this.head === null) {
