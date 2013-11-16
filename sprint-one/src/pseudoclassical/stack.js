@@ -20,3 +20,6 @@ Stack.prototype.size = function(){
   return this.length;
 };
 
+
+
+//.402s with 1,000,000 elements in arrObj

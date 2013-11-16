@@ -23,3 +23,5 @@ var makeStack = function(){
 
   return instance;
 };
+//1.1s with 1,000,000 elements.
+

@@ -28,3 +28,7 @@ var stackMethods = {
   }
 
 };
+
+
+
+// 0.51s with 1,000,000 elements in arrObj

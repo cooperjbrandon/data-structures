@@ -66,14 +66,14 @@ describe("linkedList", function() {
     expect(linkedList.tail).toEqual(null);
   });
 
-  it('returns true if the passed in value is in the linked list', function() {
-    linkedList.addToTail('a');
-    linkedList.addToTail('b');
-    linkedList.addToTail('c');
-    expect(linkedList.contains('b')).toEqual(true);
-    linkedList.removeHead();
-    expect(linkedList.contains('a')).toEqual(false);
-  });
+  // it('returns true if the passed in value is in the linked list', function() {
+  //   linkedList.addToTail('a');
+  //   linkedList.addToTail('b');
+  //   linkedList.addToTail('c');
+  //   expect(linkedList.contains('b')).toEqual(true);
+  //   linkedList.removeHead();
+  //   expect(linkedList.contains('a')).toEqual(false);
+  // });
 
   // add more tests here to test the functionality of linkedList
 });
