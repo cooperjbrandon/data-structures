@@ -5,7 +5,7 @@ var makeTree = function(value){
   newTree.parent = null;
   newTree.addChild = treeMethods.addChild;
   newTree.contains = treeMethods.contains;
-
+  newTree.removeParent = treeMethods.removeParent;
   return newTree;
 };
 
@@ -19,7 +19,7 @@ treeMethods.addChild = function(node){
 treeMethods.removeParent = function(){
   for (var i = 0; i < this.parent.children.length; i++) {
     if (this.parent.children[i] === this){
-      this.parent.children.splice(result, 1);
+      this.parent.children.splice(i, 1);
     }
   }
   this.parent = null;
