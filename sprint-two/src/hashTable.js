@@ -32,6 +32,7 @@ HashTable.prototype.retrieve = function(k){
       return retr[a][1];
     }
   }
+  return "key does not exist";
 };
 
 HashTable.prototype.remove = function(k){

@@ -19,6 +19,7 @@ describe("hashTable", function() {
     hashTable.insert(v3, v3);
     expect(hashTable.retrieve(v1)).toEqual(v1);
     expect(hashTable.retrieve(v2)).toEqual(v2);
+    expect(hashTable.retrieve("hello")).toEqual("key does not exist");
   });
 
     it("should be able to remove keys", function(){
