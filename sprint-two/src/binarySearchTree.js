@@ -5,7 +5,7 @@ var makeBinarySearchTree = function(value){
   newBSTree.parent = null;
   newBSTree.insert = bsTreeMethods.insert;
   newBSTree.contains = bsTreeMethods.contains;
-  newBSTree.removeParent = bsTreeMethods.removeParent;
+  // newBSTree.removeParent = bsTreeMethods.removeParent;
   newBSTree.depthFirstLog = bsTreeMethods.depthFirstLog;
   newBSTree.left = null;
   newBSTree.right = null;
@@ -42,15 +42,6 @@ bsTreeMethods.insert = function(node){
   }
 };
 
-bsTreeMethods.removeParent = function(){
-  for (var i = 0; i < this.parent.children.length; i++) {
-    if (this.parent.children[i] === this){
-      this.parent.children.splice(i, 1);
-    }
-  }
-  this.parent = null;
-};
-
 bsTreeMethods.contains = function(value){
   var child;
   var temp;
@@ -68,7 +59,21 @@ bsTreeMethods.contains = function(value){
   return false;
 };
 
-bsTreeMethods.depthFirstLog = function(node){
-
+bsTreeMethods.depthFirstLog = function(fn){
+  fn(this);
+  for (var i = 0; i < this.children.length; i++) {
+    this.children[i].depthFirstLog(fn);
+  }
 };
+
+// bsTreeMethods.removeParent = function(){
+//   for (var i = 0; i < this.parent.children.length; i++) {
+//     if (this.parent.children[i] === this){
+//       this.parent.children.splice(i, 1);
+//     }
+//   }
+//   this.parent = null;
+// };
+
+
 
