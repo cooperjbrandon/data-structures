@@ -21,5 +21,16 @@ describe("hashTable", function() {
     expect(hashTable.retrieve(v2)).toEqual(v2);
   });
 
+    it("should be able to remove keys", function(){
+    // force the hash function to return 0
+    spyOn(window, 'hashingFunction').andReturn(0);
+    var v1 = 'val1', v2 = 'val2'; v3 = 'val3';
+    hashTable.insert(v1, v1);
+    hashTable.insert(v2, v2);
+    hashTable.insert(v3, v3);
+    hashTable.remove(v1);
+    hashTable.remove(v2);
+    expect(hashTable.retrieve(v3)).toEqual(v3);
+  });
   // add more tests!
 });
