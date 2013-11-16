@@ -57,23 +57,54 @@ describe("linkedList", function() {
     linkedList.addToTail('a');
     linkedList.addToTail('b');
     linkedList.removeHead();
-    // linkedList.addToTail('c');
-    // expect(linkedList.head.value).toEqual('b');
-    // expect(linkedList.tail.value).toEqual('c');
+    linkedList.addToTail('c');
     expect(linkedList.head.value).toEqual('b');
+    expect(linkedList.tail.value).toEqual('c');
+    expect(linkedList.head.value).toEqual('b');
+    linkedList.removeHead();
     linkedList.removeHead();
     expect(linkedList.head).toEqual(null);
     expect(linkedList.tail).toEqual(null);
   });
 
-  // it('returns true if the passed in value is in the linked list', function() {
-  //   linkedList.addToTail('a');
-  //   linkedList.addToTail('b');
-  //   linkedList.addToTail('c');
-  //   expect(linkedList.contains('b')).toEqual(true);
-  //   linkedList.removeHead();
-  //   expect(linkedList.contains('a')).toEqual(false);
-  // });
+  it('returns true if the passed in value is in the linked list', function() {
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    linkedList.addToTail('c');
+    expect(linkedList.contains('b')).toEqual(true);
+    linkedList.removeHead();
+    expect(linkedList.contains('a')).toEqual(false);
+  });
+
+
+  it('allows sequentially adding and removing items (doubly linked)', function() {
+    expect(linkedList.removeTail()).toEqual(null);
+    linkedList.addToHead('a');
+    linkedList.addToHead('b');
+    expect(linkedList.removeTail()).toEqual('a');
+    linkedList.addToHead('c');
+    linkedList.addToHead('d');
+    expect(linkedList.removeTail()).toEqual('b');
+  });
+
+  it('points to correct head when sequentially adding and removing items (doubly linked)', function() {
+    linkedList.addToHead('a');
+    expect(linkedList.head.value).toEqual('a');
+    linkedList.addToHead('b');
+    linkedList.addToHead('c');
+    linkedList.removeHead();
+    expect(linkedList.head.value).toEqual('b');
+  });
+
+  it('points to correct tail when sequentially adding and removing items (doubly linked)', function() {
+    linkedList.addToHead('a');
+    expect(linkedList.tail.value).toEqual('a');
+    linkedList.addToHead('b');
+    linkedList.addToHead('c');
+    linkedList.addToTail('unique');
+    linkedList.removeTail();
+    expect(linkedList.tail.value).toEqual('a');
+  });
 
   // add more tests here to test the functionality of linkedList
 });
