@@ -19,9 +19,10 @@ describe("tree", function() {
     var thirdNode = makeTree('c');
     var fourthNode = makeTree('d');
     var fifthNode = makeTree('e');
+    firstNode.addChild(thirdNode);
     secondNode.addChild(fourthNode);
     secondNode.addChild(fifthNode);
-    firstNode.addChild(thirdNode);
+    expect(fourthNode.parent.parent.value).toEqual('Root');
     expect(tree.contains('b')).toEqual(true);
     expect(tree.contains('asd')).toEqual(false);
     expect(tree.contains('d')).toEqual(true);
