@@ -2,6 +2,7 @@ var makeTree = function(value){
   var newTree = {};
   newTree.value = value;
   newTree.children = [];
+  newTree.parent = null;
   newTree.addChild = treeMethods.addChild;
   newTree.contains = treeMethods.contains;
 
@@ -11,6 +12,7 @@ var makeTree = function(value){
 var treeMethods = {};
 
 treeMethods.addChild = function(node){
+  node.parent = this;
   this.children.push(node);
 };
 
