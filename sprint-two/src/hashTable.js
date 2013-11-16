@@ -14,7 +14,6 @@ var HashTable = function(){
 
 HashTable.prototype.insert = function(k, v){
   var i = hashingFunction(k, this._limit);
-  console.log(i);
   var got = this._storage.get(i);
   if (Array.isArray(got)){
     got.push([k, v]);
