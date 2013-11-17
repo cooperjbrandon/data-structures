@@ -1,5 +1,6 @@
 var HashTable = function(){
   this._limit = 8;
+  this._size = 0;
 
   // Use a limited array to store inserted elements.
   // It'll keep you from using too much space. Usage:
@@ -13,37 +14,69 @@ var HashTable = function(){
 };
 
 HashTable.prototype.insert = function(k, v){
+  this._size++;
+
   var i = hashingFunction(k, this._limit);
-  var got = this._storage.get(i);
-  if (Array.isArray(got)){
-    got.push([k, v]);
-    this._storage.set(i, got);
-  } else {
-    this._storage.set(i, [[k, v]]);
+  var bucket = this._storage.get(i) || []; // 1st run: bucket = []; 2nd run: 
+  for (var a = 0; a < bucket.length; a++) {
+    var pair = bucket[a];
+    if (pair[0] === k){
+      pair[1] = v;
+      return;
+    }
   }
+
+  bucket.push([k,v]);
+  this._storage.set(i, bucket);
+
+  if ((this._size / this._limit) > 0.75) {
+    this._limit = this._limit * 2;
+    this.resize(this._limit);
+  }
+
+};
+
+HashTable.prototype.resize = function(limit) {
+  var oldStorage = this._storage;
+  this._storage = makeLimitedArray(this._limit);
+
+  var that = this;
+  this._size = 0;
+  oldStorage.each(function(bucket){
+    for (var a = 0; a < bucket.length; a++){
+      var pair = bucket[a];
+      that.insert(pair[0], pair[1]);
+    }
+  });
 };
 
 HashTable.prototype.retrieve = function(k){
+
   var i = hashingFunction(k, this._limit);
-  var retr = this._storage.get(i);
-  for (var a = 0; a < retr.length; a++) {
-    if (retr[a][0] === k) {
-      return retr[a][1];
+  var bucket = this._storage.get(i) || [];
+  for (var a = 0; a < bucket.length; a++) {
+    var pair = bucket[a];
+    if (pair[0] === k){
+      return pair[1];
     }
   }
-  return "key does not exist";
+
+  return null;
+
 };
 
 HashTable.prototype.remove = function(k){
+
+  this._size--;
   var i = hashingFunction(k, this._limit);
-  var remo = this._storage.get(i);
-  for (var a = 0; a < remo.length; a++) {
-    if (remo[a][0] === k) {
-      remo.splice(a,1);
-      this._storage.set(i, remo);
+  var bucket = this._storage.get(i) || [];
+  for (var a = 0; a < bucket.length; a++) {
+    var pair = bucket[a];
+    if (pair[0] === k){
+      bucket.splice(a, 1);
     }
   }
-  // this._storage
+
 };
 
 // NOTE: For this code to work, you will NEED the code from hashTableHelpers.js
