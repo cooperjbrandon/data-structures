@@ -1,11 +1,10 @@
 var makeBinarySearchTree = function(value){
   var newBSTree = {};
   newBSTree.value = value;
-  newBSTree.children = [];
+  newBSTree.children = new Array(2);
   newBSTree.parent = null;
   newBSTree.insert = bsTreeMethods.insert;
   newBSTree.contains = bsTreeMethods.contains;
-  // newBSTree.removeParent = bsTreeMethods.removeParent;
   newBSTree.depthFirstLog = bsTreeMethods.depthFirstLog;
   newBSTree.left = null;
   newBSTree.right = null;
@@ -15,55 +14,48 @@ var makeBinarySearchTree = function(value){
 var bsTreeMethods = {};
 
 bsTreeMethods.insert = function(node){
-  node.parent = this;
-  var childSize = this.children.length;
-  if (childSize > 0 && node.value >= this.children[childSize - 1].value) {
-    node.left = this.children[childSize - 1];
-    this.children[childSize - 1].right = node;
-    this.children.push(node);
+  if (node.value > this.value) {
+    if (this.children[1] === undefined) {
+      this.children[1] = node;
+      node.left = this.children[0];
+    } else {
+      this.children[1].insert(node);
+    }
   } else {
-    var result = 0;
-    var keepGoing = true;
-    for (var i = 0; i < this.children.length; i++) {
-      if (keepGoing && node.value < this.children[i].value) {
-        result = i;
-        keepGoing = false;
-      }
-    }
-    this.children.splice(result, 0 , node);
-    if (this.children.length !== 1) {
-      node.right = this.children[result + 1];
-      this.children[result+1].left = node;
-    }
-    if (result !== 0) {
-      node.left = this.children[result - 1];
-      this.children[result- 1].right = node;
+    if (this.children[0] === undefined) {
+      this.children[0] = node;
+      node.right = this.children[1];
+    } else {
+      this.children[0].insert(node);
     }
   }
 };
 
 bsTreeMethods.contains = function(value){
-  var child;
-  var temp;
   if (this.value === value) {
     return true;
-  } else {
-    for (var i = 0; i < this.children.length; i++){
-      child = this.children[i];
-      temp = child.contains(value);
-      if (temp !== false){
-        return temp;
-      }
-    }
+  } else if (value > this.value && this.children[1] !== undefined) {
+    return this.children[1].contains(value);
+  } else if (value < this.value && this.children[0] !== undefined) {
+    return this.children[0].contains(value);
   }
+
   return false;
+
 };
 
 bsTreeMethods.depthFirstLog = function(fn){
   fn(this);
-  for (var i = 0; i < this.children.length; i++) {
-    this.children[i].depthFirstLog(fn);
+  if(this.children[0] !== undefined) {
+    this.children[0].depthFirstLog(fn);
   }
+  if(this.children[1] !== undefined) {
+    this.children[1].depthFirstLog(fn);
+  }
+
+  // for (var i = 0; i < this.children.length; i++) {
+  //   this.children[i].depthFirstLog(fn);
+  // }
 };
 
 // bsTreeMethods.removeParent = function(){
