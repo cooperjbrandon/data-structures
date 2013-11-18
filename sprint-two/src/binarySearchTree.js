@@ -51,31 +51,14 @@ bsTreeMethods.contains = function(value){
 };
 
 bsTreeMethods.depthFirstLog = function(fn){
-  var args;
-  if(arguments.length > 1) {
-    args = Array.protoytpe.slice.call(arguments, 1)
-  }
-  var res = fn.call(this, args);
-  if(this.children[0] !== undefined && (res === "both" || res === "left")) {
-    this.children[0].depthFirstLog(fn);
-  }
-  if(this.children[1] !== undefined  && (res === "both" || res === "right")) {
-    this.children[1].depthFirstLog(fn);
-  }
 
-  // for (var i = 0; i < this.children.length; i++) {
-  //   this.children[i].depthFirstLog(fn);
-  // }
+  var result = fn.call(this, arguments[1]);
+  if(this.children[0] !== undefined && (result === "both" || result === "left")) {
+    result = this.children[0].depthFirstLog(fn, arguments[1]);
+  }
+  if(this.children[1] !== undefined  && (result === "both" || result === "right")) {
+    result = this.children[1].depthFirstLog(fn, arguments[1]);
+  }
+  return result;
+
 };
-
-// bsTreeMethods.removeParent = function(){
-//   for (var i = 0; i < this.parent.children.length; i++) {
-//     if (this.parent.children[i] === this){
-//       this.parent.children.splice(i, 1);
-//     }
-//   }
-//   this.parent = null;
-// };
-
-
-

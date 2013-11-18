@@ -1,5 +1,6 @@
 describe("binarySearchTree", function() {
   var binarySearchTree;
+  var newTree;
   var firstNode;
   var secondNode;
   var thirdNode;
@@ -10,13 +11,15 @@ describe("binarySearchTree", function() {
     this.value = this.value + 1;
     return "both";
   };
-  // var bsTreeSearch = function(num, diff) {
-  //   diff = diff || null;
-  //   if (Math.abs(this.value - num) < Mah.abs(diff) || diff === null) {
-  //     diff = this.value - num;
-  //   }
-  //   return diff
-  // };
+  var bsTreeSearch = function(num) {
+    if (num > this.value && this.children[1] !== undefined) {
+      return "right";
+    } else if (num < this.value && this.children[0] !== undefined) {
+      return "left";
+    } else {
+      return this.value;
+    }
+  };
 
   beforeEach(function() {
     binarySearchTree = makeBinarySearchTree(8);
@@ -34,7 +37,11 @@ describe("binarySearchTree", function() {
     binarySearchTree.insert(sixthNode);
     binarySearchTree.depthFirstLog(someCallBack);
     console.log(binarySearchTree);
-    // binarySearchTree.depthFirstLog(bsTreeSearch, 154987);
+    // newTree = makeBinarySearchTree(500000);
+    // for (var i = 0; i < 1000000; i++){
+    //   newTree.insert(makeBinarySearchTree(Math.floor(1000000 * Math.random())));
+    // }
+    // console.log(newTree.depthFirstLog(bsTreeSearch, 750000));
   });
 
   it("should have methods named 'insert', 'contains', and 'depthFirstLog", function() {
