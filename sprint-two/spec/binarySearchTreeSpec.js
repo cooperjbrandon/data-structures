@@ -6,9 +6,17 @@ describe("binarySearchTree", function() {
   var fifthNode;
   var fourthNode;
   var sixthNode;
-  var someCallBack = function(node) {
-    node.value = node.value + 1;
+  var someCallBack = function() {
+    this.value = this.value + 1;
+    return "both";
   };
+  // var bsTreeSearch = function(num, diff) {
+  //   diff = diff || null;
+  //   if (Math.abs(this.value - num) < Mah.abs(diff) || diff === null) {
+  //     diff = this.value - num;
+  //   }
+  //   return diff
+  // };
 
   beforeEach(function() {
     binarySearchTree = makeBinarySearchTree(8);
@@ -24,10 +32,9 @@ describe("binarySearchTree", function() {
     binarySearchTree.insert(fourthNode);
     binarySearchTree.insert(fifthNode);
     binarySearchTree.insert(sixthNode);
-    // console.log(binarySearchTree);
-    thirdNode.insert(sixthNode);
     binarySearchTree.depthFirstLog(someCallBack);
     console.log(binarySearchTree);
+    // binarySearchTree.depthFirstLog(bsTreeSearch, 154987);
   });
 
   it("should have methods named 'insert', 'contains', and 'depthFirstLog", function() {
@@ -36,35 +43,27 @@ describe("binarySearchTree", function() {
     expect(binarySearchTree.depthFirstLog).toEqual(jasmine.any(Function));
   });
 
-  // it("should be able to tell if a given node contains the passed in value for insert", function() {
-  //   expect(binarySearchTree.contains(9)).toEqual(true);
-  //   expect(binarySearchTree.contains(13)).toEqual(false);
-  //   expect(binarySearchTree.contains(5)).toEqual(true);
-    // expect(binarySearchTree.contains(5)).toEqual(true);
-  // });
+  it("should be able to tell if a given node contains the passed in value for insert", function() {
+    expect(binarySearchTree.contains(10)).toEqual(true);
+    expect(binarySearchTree.contains(14)).toEqual(false);
+    expect(binarySearchTree.contains(5)).toEqual(false);
+    expect(binarySearchTree.contains(6)).toEqual(true);
+  });
 
-  // // it("should be able to tell if a given node contains the passed in value for removeParent", function() {
-  // //   secondNode.removeParent();
-  // //   expect(fourthNode.parent.parent).toEqual(null);
-  // //   expect(binarySearchTree.contains(3)).toEqual(false);
-  // //   expect(secondNode.contains(8)).toEqual(true);
-  // //   expect(binarySearchTree.contains(4)).toEqual(true);
-  // //   expect(binarySearchTree.contains(9)).toEqual(false);
-  // // });
-  // it("should give the correct answer for .left and .right", function() {
-  //   expect(fifthNode.right).toEqual(fourthNode);
-  //   expect(fifthNode.left).toEqual(null);
-  //   expect(fourthNode.right).toEqual(null);
-  //   expect(fourthNode.left).toEqual(fifthNode);
-  //   expect(thirdNode.left).toEqual(null);
-  //   expect(thirdNode.right).toEqual(null);
-  //   expect(secondNode.right).toEqual(firstNode);
-  //   expect(secondNode.left).toEqual(null);
-  //   expect(firstNode.left).toEqual(secondNode);
-  //   expect(firstNode.right).toEqual(null);
-  //   // expect(sixthNode.left).toEqual(fifthNode);
-  //   // expect(sixthNode.right).toEqual(fourthNode);
-  // });
+  it("should give the correct answer for .left and .right", function() {
+    expect(fifthNode.right).toEqual(null);
+    expect(fifthNode.left).toEqual(sixthNode);
+    expect(fourthNode.right).toEqual(null);
+    expect(fourthNode.left).toEqual(firstNode);
+    expect(thirdNode.left).toEqual(null);
+    expect(thirdNode.right).toEqual(null);
+    expect(secondNode.right).toEqual(null);
+    expect(secondNode.left).toEqual(null);
+    expect(firstNode.left).toEqual(null);
+    expect(firstNode.right).toEqual(fourthNode);
+    expect(sixthNode.left).toEqual(null);
+    expect(sixthNode.right).toEqual(fifthNode);
+  });
 
   // add more tests here to test the functionality of binarySearchTree
 });

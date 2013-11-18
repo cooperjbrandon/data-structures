@@ -18,13 +18,19 @@ bsTreeMethods.insert = function(node){
     if (this.children[1] === undefined) {
       this.children[1] = node;
       node.left = this.children[0];
+      if (this.children[0] !== undefined) {
+        this.children[0].right = this.children[1];
+      }
     } else {
       this.children[1].insert(node);
     }
-  } else {
+  } else if (node.value < this.value) {
     if (this.children[0] === undefined) {
       this.children[0] = node;
       node.right = this.children[1];
+      if (this.children[1] !== undefined) {
+        this.children[1].left = this.children[0];
+      }
     } else {
       this.children[0].insert(node);
     }
@@ -45,11 +51,15 @@ bsTreeMethods.contains = function(value){
 };
 
 bsTreeMethods.depthFirstLog = function(fn){
-  fn(this);
-  if(this.children[0] !== undefined) {
+  var args;
+  if(arguments.length > 1) {
+    args = Array.protoytpe.slice.call(arguments, 1)
+  }
+  var res = fn.call(this, args);
+  if(this.children[0] !== undefined && (res === "both" || res === "left")) {
     this.children[0].depthFirstLog(fn);
   }
-  if(this.children[1] !== undefined) {
+  if(this.children[1] !== undefined  && (res === "both" || res === "right")) {
     this.children[1].depthFirstLog(fn);
   }
 
